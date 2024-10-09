@@ -1,0 +1,3 @@
+* Changelog for swiss-army-knife-hs
+
+** Unreleased changes

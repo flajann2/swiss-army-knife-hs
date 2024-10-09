@@ -1,0 +1,8 @@
+* My personal notes for swiss-army-knife-hs
+  These are my personal notes for this
+  project. They are not promised to be
+  uptodate or even accurate. They are only
+  intended for myself and no one else.
+
+  You may find something useful here, but it is not gauranteed.
+ 
