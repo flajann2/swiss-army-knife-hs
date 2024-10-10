@@ -1,10 +1,10 @@
 name:                swiss-army-knife-hs
 version:             0.0.0.0
-github:              "githubuser/swiss-army-knife-hs"
+github:              "flajann2/swiss-army-knife-hs"
 license:             MIT
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2024 Author name here"
+author:              "Fred Mitchell"
+maintainer:          "fred.mitchell@atomlogik.de"
+copyright:           "2024 Fred Mitchell & Atomlogik"
 
 extra-source-files:
 - README.org
@@ -24,10 +24,15 @@ dependencies:
 
 library:
   source-dirs: src
+  ghc-options:
+    - -O2
+    #- -Wall
+  dependencies:
+    - optparse-applicative
 
 executables:
-  swiss-army-knife-hs:
-    main:                Main.hs
+  sak:
+    main:                SwissArmyKnife.hs
     source-dirs:         app
     ghc-options:
     - -threaded

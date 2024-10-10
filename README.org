@@ -1,4 +1,7 @@
 * swiss-army-knife-hs
+  A collection of powerful but useful tools.
+  Written in Haskell, the most powerful language on
+  the planet.
 
 ** Created By
    Fred Mitchell#

@@ -7,11 +7,11 @@ cabal-version: 1.12
 name:           swiss-army-knife-hs
 version:        0.0.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/swiss-army-knife-hs#readme>
-homepage:       https://github.com/githubuser/swiss-army-knife-hs#readme
-bug-reports:    https://github.com/githubuser/swiss-army-knife-hs/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2024 Author name here
+homepage:       https://github.com/flajann2/swiss-army-knife-hs#readme
+bug-reports:    https://github.com/flajann2/swiss-army-knife-hs/issues
+author:         Fred Mitchell
+maintainer:     fred.mitchell@atomlogik.de
+copyright:      2024 Fred Mitchell & Atomlogik
 license:        MIT
 license-file:   LICENSE
 build-type:     Simple
@@ -21,21 +21,24 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/swiss-army-knife-hs
+  location: https://github.com/flajann2/swiss-army-knife-hs
 
 library
   exposed-modules:
-      Lib
+      CommandLine
+      Knives
   other-modules:
       Paths_swiss_army_knife_hs
   hs-source-dirs:
       src
+  ghc-options: -O2
   build-depends:
       base >=4.7 && <5
+    , optparse-applicative
   default-language: Haskell2010
 
-executable swiss-army-knife-hs
-  main-is: Main.hs
+executable sak
+  main-is: SwissArmyKnife.hs
   other-modules:
       Paths_swiss_army_knife_hs
   hs-source-dirs:
