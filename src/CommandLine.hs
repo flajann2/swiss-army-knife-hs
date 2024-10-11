@@ -12,23 +12,24 @@ data Command
   | Kernel KernelOptions
   | Sleep SleepOptions
   | ZfsClean ZfsCleanOptions
+  deriving Show 
 
 data ExtIPOptions = ExtIPOptions
   { nolocation :: Bool
   , ipv6 :: Bool
-  }
+  } deriving Show
 
 data KernelOptions = KernelOptions
-  { justVersion :: Bool }
+  { justVersion :: Bool } deriving Show
 
 data SleepOptions = SleepOptions
-  { secondsToSleep :: Maybe Int }
+  { secondsToSleep :: Maybe Int } deriving Show
 
 data ZfsCleanOptions = ZfsCleanOptions
-  { notdefinedyet :: Bool }
+  { notdefinedyet :: Bool } deriving Show
 
 data GlobalOptions = GlobalOptions
-  { verbose :: Bool }
+  { verbose :: Bool } deriving Show
 
 globalOptionsParser :: Parser GlobalOptions
 globalOptionsParser = GlobalOptions
@@ -83,26 +84,4 @@ commandParser = subparser
 opts :: Parser (GlobalOptions, Command)
 opts = (,) <$> globalOptionsParser <*> commandParser
 
--- -- Main program logic
--- commandLine :: IO ()
--- commandLine = do
-  -- (globalOpts, cmd) <- execParser $ info (opts <**> helper)
-    -- ( fullDesc
-      -- <> progDesc "Many useful utilities, such as getting your external IP address, installed kernel, etc."
-      -- <> header "Swiss Army Knife -- Many useful functions for the hacker in all of us." )
- --  
-  -- -- Use the parsed options and commands
-  -- putStrLn $ "Verbose mode: " ++ show (verbose globalOpts)
- --  
-  -- case cmd of
-    -- ExtIP extipOpts -> do
-      -- knifeExtIP extioOpts
-      -- -- putStrLn $ "No location mode: " ++ show (nolocation extipOpts)
-      -- -- putStrLn $ "IPv6 mode: " ++ show (ipv6 extipOpts)
-    -- Kernel kernelOpts -> do
-      -- putStrLn $ "Just show version mode: " ++ show (justVersion kernelOpts)
-    -- Sleep sleepOpts -> do
-      -- putStrLn $ "Put the machine to sleep." ++ show (secondsToSleep sleepOpts)
-    -- ZfsClean  zfsOpts -> do
-      -- putStrLn $ "Not Implemented Yet mode: " ++ show (notdefinedyet zfsOpts)
       

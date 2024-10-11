@@ -29,26 +29,30 @@ library:
     #- -Wall
   dependencies:
     - optparse-applicative
-
+    - http-conduit
+    - aeson
+    - bytestring
+    - process
+    
 executables:
   sak:
     main:                SwissArmyKnife.hs
     source-dirs:         app
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - swiss-army-knife-hs
-    - optparse-applicative
+      - swiss-army-knife-hs
+      - optparse-applicative
 
 tests:
   swiss-army-knife-hs-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - swiss-army-knife-hs
+      - swiss-army-knife-hs

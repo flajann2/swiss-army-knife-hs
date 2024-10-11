@@ -15,9 +15,6 @@ main = do
       <> progDesc "Many useful utilities, such as getting your external IP address, installed kernel, etc."
       <> header "Swiss Army Knife -- Many useful functions for the hacker in all of us." )
   
-  -- Use the parsed options and commands
-  putStrLn $ "Verbose mode: " ++ show (verbose globalOpts)
-  
   case cmd of
     ExtIP extipOpts   -> knifeExtIP extipOpts
     Kernel kernelOpts -> knifeKernel kernelOpts
