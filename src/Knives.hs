@@ -120,13 +120,6 @@ knifeSleep opts = do
   _nn <-  readProcess "systemctl" ["suspend", "-i"] ""
   return ()
 
-
-
-
-
-
-
-
 knifeZfsClean :: ZfsCleanOptions -> IO ()
 knifeZfsClean opts = do
   putStrLn $ "Not Implemented Yet mode: " ++ show (notdefinedyet opts)

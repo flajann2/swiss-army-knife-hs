@@ -3,11 +3,34 @@
   Written in Haskell, the most powerful language on
   the planet.
 
+  Currently, only Arch is supported, BTW. I am open to pull requests for
+  other distros. There are a lot of subtle differences and I don't 
+  have the time to support everything.
+
 ** Created By
    Fred Mitchell#
 
 ** Introduction
+   Swiss-Army-Knife is a collection of useful
+   tools that you can do quickly.
+
+   Currently, only Arch linux is supported. I am open to pull requests
+   to support other distros. 
 
 ** Documentation
-
+   These are the current "knives" implemented. More to come. Open
+   to suggestions.
+*** sak --help
+    Will list all the current commands.
+*** sak extip
+    Will tell you what your external IP is for your connection,
+    either in IPv4 or IPv6 Useful if you use a VPN
+*** sak kernel
+    Will tell you the version of the installed kernel as well
+    as the running version.
+*** sak sleep
+    Will put your system in standby mode.
 ** Examples
+   + sak extip
+     Will list your external IP and location information
+

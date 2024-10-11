@@ -5,4 +5,9 @@
   intended for myself and no one else.
 
   You may find something useful here, but it is not gauranteed.
- 
+** Nothing to see here. Move it along. 
+** Just ported this from the Elixir version. Elixir is not good for
+   command-line utilities. It is great for writing daemons, however,
+   with its all-mighty OTP.
+** I need to set this up in the AUR.
+
