@@ -2,10 +2,25 @@
 
 module Main where
 
+import Options.Applicative
+import Data.Semigroup ((<>))
+
 import CommandLine
 import Knives
 
 main :: IO ()
 main = do
-  parms <- commandLine
-  doTheCut
+  (globalOpts, cmd) <- execParser $ info (opts <**> helper)
+    ( fullDesc
+      <> progDesc "Many useful utilities, such as getting your external IP address, installed kernel, etc."
+      <> header "Swiss Army Knife -- Many useful functions for the hacker in all of us." )
+  
+  -- Use the parsed options and commands
+  putStrLn $ "Verbose mode: " ++ show (verbose globalOpts)
+  
+  case cmd of
+    ExtIP extipOpts   -> knifeExtIP extipOpts
+    Kernel kernelOpts -> knifeKernel kernelOpts
+    Sleep sleepOpts   -> knifeSleep sleepOpts 
+    ZfsClean zfsOpts  -> knifeZfsClean zfsOpts
+
