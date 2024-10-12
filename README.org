@@ -1,5 +1,5 @@
 * swiss-army-knife-hs
-  A collection of powerful but useful tools.
+  A collection of powerful but usefuli small tools.
   Written in Haskell, the most powerful language on
   the planet.
 
