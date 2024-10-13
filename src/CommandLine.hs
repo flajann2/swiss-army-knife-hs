@@ -11,7 +11,7 @@ data Command
   = ExtIP ExtIPOptions
   | Kernel KernelOptions
   | Sleep SleepOptions
-  | ZfsClean ZfsCleanOptions
+  | ZfsCheck ZfsCheckOptions
   deriving Show 
 
 data ExtIPOptions = ExtIPOptions
@@ -25,8 +25,8 @@ data KernelOptions = KernelOptions
 data SleepOptions = SleepOptions
   { secondsToSleep :: Maybe Int } deriving Show
 
-data ZfsCleanOptions = ZfsCleanOptions
-  { notdefinedyet :: Bool } deriving Show
+data ZfsCheckOptions = ZfsCheckOptions
+  { full :: Bool } deriving Show
 
 data GlobalOptions = GlobalOptions
   { verbose :: Bool } deriving Show
@@ -63,12 +63,12 @@ sleepOptionsParser = SleepOptions
                               <> metavar "SECONDS"
                               <> help "Seconds to wait before going to sleep"))
 
-zfscleanOptionsParser :: Parser ZfsCleanOptions
-zfscleanOptionsParser = ZfsCleanOptions
+zfscheckOptionsParser :: Parser ZfsCheckOptions
+zfscheckOptionsParser = ZfsCheckOptions
   <$> switch
-  ( long "notdefinedyet"
-    <> short '0'
-    <> help "Not Implemented Yet" )
+  ( long "full"
+    <> short 'f'
+    <> help "Check all kernel versions" )
 
 
 -- Combine the subcommand parsers
@@ -77,7 +77,7 @@ commandParser = subparser
   (    command "extip" (info (ExtIP <$> extipOptionsParser) (progDesc "Display external IP address"))
     <> command "kernel" (info (Kernel <$> kernelOptionsParser) (progDesc "Display kernel information, both installed and currently running"))
     <> command "sleep"  (info (Sleep <$> sleepOptionsParser) (progDesc "Put the machine to sleep"))
-    <> command "zfsclean" (info (ZfsClean <$> zfscleanOptionsParser) (progDesc "Not Implemented Yet"))
+    <> command "zfscheck" (info (ZfsCheck <$> zfscheckOptionsParser) (progDesc "Not Implemented Yet"))
   )
 
 -- Combine global options with the command parser

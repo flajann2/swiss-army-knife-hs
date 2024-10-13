@@ -19,5 +19,5 @@ main = do
     ExtIP extipOpts   -> knifeExtIP extipOpts
     Kernel kernelOpts -> knifeKernel kernelOpts
     Sleep sleepOpts   -> knifeSleep sleepOpts 
-    ZfsClean zfsOpts  -> knifeZfsClean zfsOpts
+    ZfsCheck zfsOpts  -> knifeZfsCheck zfsOpts
 

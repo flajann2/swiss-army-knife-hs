@@ -4,12 +4,13 @@ module Knives
     ( knifeKernel
     , knifeExtIP
     , knifeSleep
-    , knifeZfsClean
+    , knifeZfsCheck
     ) where
 
 import Network.HTTP.Simple
 import Data.Aeson
 import qualified Data.ByteString.Lazy as LBS
+import qualified Data.ByteString.Lazy.Char8 as LBS8
 import Control.Monad ((>=>))
 import Data.Bool (bool)
 import System.Process
@@ -122,4 +123,15 @@ knifeSleep opts = do
 
 knifeZfsCheck :: ZfsCheckOptions -> IO ()
 knifeZfsCheck opts = do
-  putStrLn $ "Not Implemented Yet mode: " ++ show (notdefinedyet opts)
+  putStrLn $ "Check the version of archzfs and determine if an upgrade is possible " ++ show (full opts)
+  let url_zfs = "https://raw.githubusercontent.com/openzfs/zfs/master/META"
+
+  target_version <- readProcess "pacman" ["-Si", "linux"] "" -- | awk '/^Version/ { print $3 }'" ""
+  compat_version <- readProcess "curl" ["-sSL", url_zfs] ""
+
+  putStrLn target_version
+  putStrLn compat_version
+
+  let target = LBS8.unpack $ head [v | v <- LBS8.lines (LBS8.pack target_version), (LBS8.pack "Version") `LBS.isPrefixOf` v]
+      compat = LBS8.unpack $ head [v | v <- LBS8.lines (LBS8.pack compat_version), (LBS8.pack "Linux-Maximum:") `LBS.isPrefixOf` v]
+  putStrLn $ target ++ " - " ++ compat
