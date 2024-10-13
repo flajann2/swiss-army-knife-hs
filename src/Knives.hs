@@ -9,12 +9,15 @@ module Knives
 
 import Network.HTTP.Simple
 import Data.Aeson
+import Data.Bool (bool)
+import Data.List (delete)
+import Data.List.Split (splitOn)
+import Data.Char (isSpace)
+import Data.List (isInfixOf)
 import qualified Data.ByteString.Lazy as LBS
 import qualified Data.ByteString.Lazy.Char8 as LBS8
 import Control.Monad ((>=>))
-import Data.Bool (bool)
 import System.Process
-
 import CommandLine
 
 data RExtIP = RExtIP
@@ -123,15 +126,33 @@ knifeSleep opts = do
 
 knifeZfsCheck :: ZfsCheckOptions -> IO ()
 knifeZfsCheck opts = do
-  putStrLn $ "Check the version of archzfs and determine if an upgrade is possible " ++ show (full opts)
+  putStrLn $ "Check the version of archzfs with repo kernel version so you can determine if an upgrade is possible."
+
   let url_zfs = "https://raw.githubusercontent.com/openzfs/zfs/master/META"
 
-  target_version <- readProcess "pacman" ["-Si", "linux"] "" -- | awk '/^Version/ { print $3 }'" ""
-  compat_version <- readProcess "curl" ["-sSL", url_zfs] ""
+  repo_version  <- readProcess "pacman" ["-Si", "linux"] "" -- | awk '/^Version/ { print $3 }'" ""
+  archzfs_version <- readProcess "curl" ["-sSL", url_zfs] ""
+  skernel <- readProcess "uname" ["-r"] ""
+  sinstalled <- readProcess "pacman" ["-Q", "linux"] ""
 
-  putStrLn target_version
-  putStrLn compat_version
+  let repo    = splitAndTrim
+                $ LBS8.unpack
+                $ head [v | v <- LBS8.lines (LBS8.pack repo_version), (LBS8.pack "Version") `LBS.isPrefixOf` v]
+      archzfs = splitAndTrim
+                $ LBS8.unpack
+                $ head [v | v <- LBS8.lines (LBS8.pack archzfs_version), (LBS8.pack "Linux-Maximum:") `LBS.isPrefixOf` v]
+      running = trim skernel
+      installed = unwords
+                $ filter (not . ("linux" `isInfixOf`))
+                $ words
+                $ trim sinstalled
 
-  let target = LBS8.unpack $ head [v | v <- LBS8.lines (LBS8.pack target_version), (LBS8.pack "Version") `LBS.isPrefixOf` v]
-      compat = LBS8.unpack $ head [v | v <- LBS8.lines (LBS8.pack compat_version), (LBS8.pack "Linux-Maximum:") `LBS.isPrefixOf` v]
-  putStrLn $ target ++ " - " ++ compat
+  putStrLn $ "\n      repo: " ++ repo
+    ++ "\n       zfs: " ++ archzfs
+    ++ "\n   running: " ++ running
+    ++ "\n installed: " ++ installed
+
+  where
+    splitAndTrim line = trim $ last $ splitOn ":" line
+    trim = f . f
+      where f = reverse . dropWhile isSpace

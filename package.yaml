@@ -33,6 +33,7 @@ library:
     - aeson
     - bytestring
     - process
+    - split
     
 executables:
   sak:

@@ -39,6 +39,7 @@ library
     , http-conduit
     , optparse-applicative
     , process
+    , split
   default-language: Haskell2010
 
 executable sak
