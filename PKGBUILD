@@ -1,19 +1,19 @@
 # Maintainer: Fred Mitchell <fred.mitchell@atomlogik.de>
-pkgname=swiss-army-knfe
+pkgname=swiss-army-knife
 pkgver=0.0.0.1
 pkgrel=1
-pkgdesc="A collection of powerful but usefuli small tools."
+pkgdesc="A collection of powerful but useful small tools."
 arch=('x86_64')
 url="https://github.com/flajann2/swiss-army-knife-hs"
 license=('MIT')
-depends=('ghc' 'haskell-stack')
+depends=('ghc' 'stack')
 makedepends=('git')
 source=("https://github.com/flajann2/swiss-army-knife-hs.git")
 md5sums=('SKIP')
 
 build() {
     cd "$srcdir/$pkgname"
-    stack build --system-ghc
+    stack build --system-ghc --ghc-options="-O3"
 }
 
 package() {

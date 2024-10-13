@@ -31,7 +31,7 @@ library
       Paths_swiss_army_knife_hs
   hs-source-dirs:
       src
-  ghc-options: -O2
+  ghc-options: -O2 -Wall
   build-depends:
       aeson
     , base >=4.7 && <5
