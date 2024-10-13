@@ -4,7 +4,7 @@
 module CommandLine where
 
 import Options.Applicative
-import Data.Semigroup ((<>))
+-- import Data.Semigroup ((<>))
 
 -- Define data types for our commands and options
 data Command
@@ -83,5 +83,3 @@ commandParser = subparser
 -- Combine global options with the command parser
 opts :: Parser (GlobalOptions, Command)
 opts = (,) <$> globalOptionsParser <*> commandParser
-
-      

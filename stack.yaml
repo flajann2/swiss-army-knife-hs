@@ -4,7 +4,7 @@ notify-if-nix-on-path: false
 nix:
   enable: false
 
-local-bin-path: bin
+local-bin-path: ./bin
 
 extra-deps: 
  - optparse-applicative-0.17.0.0

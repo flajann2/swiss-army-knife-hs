@@ -1,4 +1,8 @@
 .stack-work/
 *~
 **/swiss-army-knife-hs.git
+src/
+pkg/
+*.tar.zst
+swiss-army-knife-hs/
 
