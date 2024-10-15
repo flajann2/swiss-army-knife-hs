@@ -1,4 +1,4 @@
-resolver: lts-19.6
+resolver: lts-22.37
 
 notify-if-nix-on-path: false
 nix:
@@ -6,5 +6,5 @@ nix:
 
 local-bin-path: ./bin
 
-extra-deps: 
- - optparse-applicative-0.17.0.0
+#extra-deps: 
+# - optparse-applicative-0.17.0.0
