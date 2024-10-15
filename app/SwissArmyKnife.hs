@@ -20,4 +20,3 @@ main = do
     Kernel kernelOpts -> knifeKernel kernelOpts
     Sleep sleepOpts   -> knifeSleep sleepOpts 
     ZfsCheck zfsOpts  -> knifeZfsCheck zfsOpts
-
