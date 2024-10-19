@@ -6,5 +6,3 @@ nix:
 
 local-bin-path: ./bin
 
-#extra-deps: 
-# - optparse-applicative-0.17.0.0
