@@ -1,6 +1,6 @@
 # Maintainer: Fred Mitchell <fred.mitchell@atomlogik.de>
 pkgname=swiss-army-knife-hs
-pkgver=0.0.0.2
+pkgver=0.0.1.0
 pkgrel=1
 pkgdesc="A collection of powerful but useful small tools."
 arch=('x86_64')

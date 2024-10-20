@@ -35,6 +35,8 @@
     does not keep up with the latest kernel release.
     Check to see the latest kernel zfs supports before
     you do a system upgrade.
+*** sak macros
+    Enable your own custom macros
 ** Examples
    + sak extip
      Will list your external IP and location information

@@ -5,6 +5,7 @@ module Knives
     , knifeExtIP
     , knifeSleep
     , knifeZfsCheck
+    , kinfeYamlMacros
     ) where
 
 import Network.HTTP.Simple
@@ -156,3 +157,7 @@ knifeZfsCheck opts = do
     splitAndTrim line = trim $ last $ splitOn ":" line
     trim = f . f
       where f = reverse . dropWhile isSpace
+
+kinfeYamlMacros :: YamlMacosOptions -> IO ()
+knifeYamlMacros opts = do
+  return ()
