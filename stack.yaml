@@ -5,4 +5,3 @@ nix:
   enable: false
 
 local-bin-path: ./bin
-

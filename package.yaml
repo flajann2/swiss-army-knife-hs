@@ -27,6 +27,7 @@ library:
     - bytestring
     - process
     - split
+    - yaml
     
 executables:
   sak:
