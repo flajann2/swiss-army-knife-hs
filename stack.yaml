@@ -5,3 +5,10 @@ nix:
   enable: false
 
 local-bin-path: ./bin
+
+allow-newer: false
+
+extra-deps:
+  - yaml-combinators-1.1.2.1
+
+## allow-newer-deps: []

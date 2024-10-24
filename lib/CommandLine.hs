@@ -106,7 +106,7 @@ commandParser = subparser
     <> command "kernel" (info (Kernel <$> kernelOptionsParser) (progDesc "Display kernel information, both installed and currently running"))
     <> command "sleep"  (info (Sleep <$> sleepOptionsParser) (progDesc "Put the machine to sleep"))
     <> command "zfscheck" (info (ZfsCheck <$> zfscheckOptionsParser) (progDesc "Check ZFS kernel versions for compatibility"))
-    <> command "macos" (info (YamlMacros <$> yamlOptionsParser) (progDesc "Load Yaml Macros"))
+    <> command "macros" (info (YamlMacros <$> yamlOptionsParser) (progDesc "Load Yaml Macros"))
   )
 
 -- Combine global options with the command parser

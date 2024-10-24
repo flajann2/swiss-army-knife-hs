@@ -28,6 +28,7 @@ library:
     - process
     - split
     - yaml
+    - yaml-combinators
     
 executables:
   sak:
