@@ -29,6 +29,8 @@ library:
     - split
     - yaml
     - yaml-combinators
+    - vector
+    - text
     
 executables:
   sak:

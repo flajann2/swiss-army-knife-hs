@@ -5,11 +5,13 @@ copyright: 2024
 
 knife:
   command: ExtIP
-  switch:
+  option:
+    flavor: switch
     long: nolocation
     short: n
     help: Don't display location information
-  switch:
+  option:
+    flavor: switch
     long: ipv6
     short: i
     help: Display the IPv6 address
@@ -25,12 +27,28 @@ knife:
 
 knife:
   command: Kernel
-  switch:
+  option:
+    flavor: switch
     long: justversion
     short: j
     help: Just display the numerical version number, no adjoining text.
   action:
     ex: echo "some action"
-    
-    
-      
+
+knife:
+  command: Sleep
+  option:
+    flavor: parm
+    long: wait
+    short: w
+    meta: SECONDS
+    type: Int
+    help: Seconds to wait before going to sleep
+  action:
+    ex:
+      when: wait
+        - sleep ${SECONDS}
+        - echo "wait ${SECONDS} seconds then hibernate"
+      otherwise:
+        - echo "hibernate"
+        

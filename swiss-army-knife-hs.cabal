@@ -45,6 +45,8 @@ library
     , optparse-applicative
     , process
     , split
+    , text
+    , vector
     , yaml
     , yaml-combinators
   default-language: Haskell2010

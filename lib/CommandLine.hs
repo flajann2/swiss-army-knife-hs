@@ -21,11 +21,11 @@ import Options.Applicative
 
 -- Define data types for our commands and options
 data Command
-  = ExtIP ExtIPOptions
-  | Kernel KernelOptions
-  | Sleep SleepOptions
-  | ZfsCheck ZfsCheckOptions
-  | YamlMacros YamlMacrosOptions
+  = ExtIP      !ExtIPOptions
+  | Kernel     !KernelOptions
+  | Sleep      !SleepOptions
+  | ZfsCheck   !ZfsCheckOptions
+  | YamlMacros !YamlMacrosOptions
   deriving Show 
 
 data ExtIPOptions = ExtIPOptions
