@@ -1,0 +1,9 @@
+
+with-compiler: ghc-9.10.1
+
+packages:
+    ./
+
+
+allow-older: *
+allow-newer: *
