@@ -2,6 +2,7 @@
 module Knives.WireGuard where
 
 import CommandLine
+import System.Process
 import System.Directory (getDirectoryContents)
 import System.FilePath (dropExtension, takeExtension)
 import Control.Monad (when)
@@ -35,6 +36,12 @@ knifeWireGuard WireGuardOptions { listWGs
     activate vpn = undefined
     deactivate   = undefined
     reactivate   = undefined
-    wgStatus :: [String] -> IO [{String, String}]
+
+    wgStatus :: [String] -> IO [(String, String)]
     wgStatus wgs = do
-      let wgss =
+      let quick = map (\w -> "wg-quick" ++ w) wgs
+      let cmd = ["systemctl", "is-active"] ++ quick
+
+
+
+ -- systemctl is-active wg-quick@nyc71 wg-quick@erf91
