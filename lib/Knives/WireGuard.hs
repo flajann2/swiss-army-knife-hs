@@ -36,18 +36,28 @@ knifeWireGuard WireGuardOptions { listWGs
                                    , deactivateWG
                                    , reactivateWG]
     check bs = (length $ filter id bs) `elem` [0, 1]
-    activate vpn = undefined
+
+    vpn2wg vpn = "wg-quick@" ++ vpn
+    
+    activate :: String -> IO ()
+    activate vpn = do
+      _ <- systemctl ["start", vpn2wg vpn]
+      return ()
+      
     deactivate   = undefined
     reactivate   = undefined
 
+    systemctl :: [String] -> IO [String]
+    systemctl parms = do
+      (_, Just hout, _, _) <- createProcess (proc "systemctl" parms) { std_out = CreatePipe }
+      out <- hGetContents hout
+      return $ lines out
+      
     wgStatus :: [String] -> IO [(String, String, Bool)]
     wgStatus wgs = do
-      let quick = map (\w -> "wg-quick@" ++ w) wgs
+      let quick = map (\w -> vpn2wg w) wgs
       let cmd = ["is-active"] ++ quick
-      (_, Just hout, _, _) <- createProcess (proc "systemctl" cmd) { std_out = CreatePipe }
-      out <- hGetContents hout
-      let stats = lines out
-      print out
+      stats <- systemctl cmd
       return $ [(wg, sact, sact == "active") | (wg, sact) <- zip wgs stats  ]
 
     formatStatus :: [(String, String, Bool)] -> String

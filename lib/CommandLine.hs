@@ -78,7 +78,7 @@ wgOptionsParser = WireGuardOptions
   <$> switch   ( long "list"
                  <> short 'l'
                  <> help "List all installed WireGuardG VPNs")
-  <*> optional (option auto ( long "activate"
+  <*> optional (strOption ( long "activate"
                               <> short 'a'
                               <> metavar "WGVPN"
                               <> help "WireGuard VPN to activate"))
