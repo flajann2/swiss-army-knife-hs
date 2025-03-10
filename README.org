@@ -10,6 +10,10 @@
 ** Created By
    Fred Mitchell#
 
+** Versions
+   + 0.0.0.2 - bug fixes
+   + 0.0.1.0 - new feature
+   
 ** Introduction
    Swiss-Army-Knife is a collection of useful
    tools that you can do quickly.
@@ -35,6 +39,11 @@
     does not keep up with the latest kernel release.
     Check to see the latest kernel zfs supports before
     you do a system upgrade.
+*** sak wg
+    If you use WireGuard for your VPN, manage it from
+    here. List your installed WireGuard options,
+    and swap among them.
+
 ** Examples
    + sak extip
      Will list your external IP and location information

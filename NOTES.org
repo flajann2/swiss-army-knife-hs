@@ -10,4 +10,6 @@
    command-line utilities. It is great for writing daemons, however,
    with its all-mighty OTP.
 ** I need to set this up in the AUR.
-
+** Will compile with GHC2021, but not GHC2024
+   I will address this problem later, but is not a show-stopper.
+   

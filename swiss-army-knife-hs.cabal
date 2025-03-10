@@ -1,11 +1,11 @@
-cabal-version: 1.12
+cabal-version: 1.14
 
 -- This file has been generated from package.yaml by hpack version 0.35.2.
 --
 -- see: https://github.com/sol/hpack
 
 name:           swiss-army-knife-hs
-version:        0.0.0.0
+version:        0.0.1.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/swiss-army-knife-hs#readme>
 homepage:       https://github.com/flajann2/swiss-army-knife-hs#readme
 bug-reports:    https://github.com/flajann2/swiss-army-knife-hs/issues
@@ -27,11 +27,16 @@ library
   exposed-modules:
       CommandLine
       Knives
+      Knives.Sleep
+      Knives.ExtIP
+      Knives.WireGuard
+      Knives.ZfsCheck
+      Knives.Kernel
   other-modules:
       Paths_swiss_army_knife_hs
   hs-source-dirs:
       lib
-  ghc-options: -O3 -Wall
+  ghc-options: -O2 -Wall
   build-depends:
       aeson
     , base >=4.7 && <5
@@ -40,7 +45,7 @@ library
     , optparse-applicative
     , process
     , split
-  default-language: Haskell2010
+  default-language: GHC2021
 
 executable sak
   main-is: SwissArmyKnife.hs
@@ -53,7 +58,7 @@ executable sak
       base >=4.7 && <5
     , optparse-applicative
     , swiss-army-knife-hs
-  default-language: Haskell2010
+  default-language: GHC2021
 
 test-suite swiss-army-knife-hs-test
   type: exitcode-stdio-1.0
@@ -66,4 +71,4 @@ test-suite swiss-army-knife-hs-test
   build-depends:
       base >=4.7 && <5
     , swiss-army-knife-hs
-  default-language: Haskell2010
+  default-language: GHC2021
