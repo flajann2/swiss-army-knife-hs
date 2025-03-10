@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 
 module Knives.WireGuard where
 
@@ -43,9 +44,18 @@ knifeWireGuard WireGuardOptions { listWGs
     activate vpn = do
       _ <- systemctl ["start", vpn2wg vpn]
       return ()
-      
-    deactivate   = undefined
-    reactivate   = undefined
+
+    deactivate :: IO ()
+    deactivate   = do
+      awgs <- activeWG
+      mapM_ (\w -> systemctl $ ["stop"] ++ [vpn2wg w]) awgs
+      return ()
+
+    reactivate :: IO ()
+    reactivate   = do
+      awgs <- activeWG
+      mapM_ (\w -> systemctl $ ["restart"] ++  [vpn2wg w]) awgs
+      return()
 
     systemctl :: [String] -> IO [String]
     systemctl parms = do
@@ -63,6 +73,12 @@ knifeWireGuard WireGuardOptions { listWGs
     formatStatus :: [(String, String, Bool)] -> String
     formatStatus wss = intercalate "\n" [w ++ ": " ++ s |(w, s, _) <- wss]
 
+    activeWG :: IO [String]
+    activeWG = do
+      wgl <- wgList
+      wgs <- wgStatus wgl
+      return [s | (s, _, b) <- wgs, b]
+      
 -- systemctl is-active wg-quick@nyc71 wg-quick@erf91
 -- import System.Process
 -- 
