@@ -45,6 +45,8 @@ library
     , optparse-applicative
     , process
     , split
+    , directory
+    , filepath
   default-language: GHC2021
 
 executable sak

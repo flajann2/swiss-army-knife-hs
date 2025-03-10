@@ -96,7 +96,7 @@ commandParser = subparser
   (    command "extip"    (info (ExtIP     <$> extipOptionsParser)    (progDesc "Display external IP address"))
     <> command "kernel"   (info (Kernel    <$> kernelOptionsParser)   (progDesc "Display kernel information, both installed and currently running"))
     <> command "sleep"    (info (Sleep     <$> sleepOptionsParser)    (progDesc "Put the machine to sleep"))
-    <> command "zfscheck" (info (ZfsCheck  <$> zfscheckOptionsParser) (progDesc "Chech zfs availibility for the current kernel"))
+    <> command "zfscheck" (info (ZfsCheck  <$> zfscheckOptionsParser) (progDesc "Check zfs availibility for the current kernel"))
     <> command "wg"       (info (WireGuard <$> wgOptionsParser)       (progDesc "Manage WireGuard VPNs"))
   )
 
