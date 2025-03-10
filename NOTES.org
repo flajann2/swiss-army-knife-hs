@@ -12,4 +12,9 @@
 ** I need to set this up in the AUR.
 ** Will compile with GHC2021, but not GHC2024
    I will address this problem later, but is not a show-stopper.
-   
+** Release instructions for the AUR
+   + update the version and release numbers in both:
+     + PKGBUILD
+     + .SRCINFO
+     + as well as in the cabal file
+   + 

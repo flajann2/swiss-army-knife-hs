@@ -33,11 +33,12 @@ knifeWireGuard WireGuardOptions { listWGs
       let wgconf = filter (\f -> takeExtension f == ".conf") rawlist
       let wgs = map (\f -> dropExtension f) wgconf
       return wgs
+      
     checkMutualExclusivity = check [ activateWG /= Nothing
                                    , deactivateWG
                                    , reactivateWG]
-    check bs = (length $ filter id bs) `elem` [0, 1]
 
+    check bs   = (length $ filter id bs) `elem` [0, 1]
     vpn2wg vpn = "wg-quick@" ++ vpn
     
     activate :: String -> IO ()
@@ -78,12 +79,3 @@ knifeWireGuard WireGuardOptions { listWGs
       wgl <- wgList
       wgs <- wgStatus wgl
       return [s | (s, _, b) <- wgs, b]
-      
--- systemctl is-active wg-quick@nyc71 wg-quick@erf91
--- import System.Process
--- 
--- main :: IO ()
--- main = do
---     (_, Just hout, _, _) <- createProcess (proc "ls" ["-l"]) { std_out = CreatePipe }
---     output <- hGetContents hout
---     putStrLn output

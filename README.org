@@ -8,7 +8,7 @@
   have the time to support everything.
 
 ** Created By
-   Fred Mitchell#
+   Fred Mitchell & Atomlogik
 
 ** Versions
    + 0.0.0.2 - bug fixes
@@ -47,4 +47,6 @@
 ** Examples
    + sak extip
      Will list your external IP and location information
-
+   + sak wg -l
+     (If you are using wg_quick) will list all of your available WG vpns.
+     
