@@ -6,8 +6,8 @@ pkgdesc="A collection of powerful but useful small tools."
 arch=('x86_64')
 url="https://github.com/flajann2/swiss-army-knife-hs"
 license=('MIT')
-depends=('ghc' 'cabal-install')
-makedepends=('git' 'cabal-install')
+depends=('ghc' 'cabal')
+makedepends=('git' 'cabal')
 source=("$pkgname::git+https://github.com/flajann2/swiss-army-knife-hs.git")
 md5sums=('SKIP')
 
@@ -19,6 +19,9 @@ build() {
 
 package() {
     cd "$srcdir/$pkgname"
+    cabal install --destdir="$pkgdir" --prefix=/usr
     install -Dm755 $(find . -path "*/install/*" -name sak -type f) "$pkgdir/usr/bin/sak"
     install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
+
+

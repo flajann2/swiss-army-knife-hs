@@ -7,7 +7,7 @@ pkgbase = swiss-army-knife-hs
 	license = MIT
 	makedepends = git
 	depends = ghc
-	depends = cabal-install
+	depends = cabal
 	source = swiss-army-knife-hs::git+https://github.com/flajann2/swiss-army-knife-hs.git
 	md5sums = SKIP
 
