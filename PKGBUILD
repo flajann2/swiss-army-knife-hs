@@ -21,7 +21,7 @@ package() {
     echo "A: $srcdir/$pkgname"
     echo "B: $pkgdir/usr/bin/sak"
     cd "$srcdir/$pkgname"
-    mkdir -p "$pkgdir/usr/bin"
+    #mkdir -p "$pkgdir/usr/bin"
     cabal install --overwrite-policy=always
     install -Dm755 $(find . -path "*/install/*" -name sak -type f) "$pkgdir/usr/bin/sak"
     install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
