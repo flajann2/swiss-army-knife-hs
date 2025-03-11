@@ -6,13 +6,7 @@ import CommandLine
 import Network.HTTP.Simple
 import Data.Aeson
 import Data.Bool (bool)
-import Data.List.Split (splitOn)
-import Data.Char (isSpace)
-import Data.List (isInfixOf)
-import qualified Data.ByteString.Lazy as LBS
-import qualified Data.ByteString.Lazy.Char8 as LBS8
 import Control.Monad ((>=>))
-import System.Process
 
 data RExtIP = RExtIP
   { ip :: String } deriving Show
@@ -56,11 +50,10 @@ instance FromJSON RLoc where
     <*> v .: "query"
   
 knifeExtIP :: ExtIPOptions -> IO ()
-knifeExtIP opts = do
-  res <- (parseRequest >=> httpLBS) $ bool url_ipv4 url_ipv6 $ ipv6 opts
-  let status_code = getResponseStatusCode res
+knifeExtIP optsE = do
+  res <- (parseRequest >=> httpLBS) $ bool url_ipv4 url_ipv6 $ ipv6 optsE
   putStrLn $ ipaddr res
-  if (not $ nolocation opts)
+  if (not $ nolocation optsE)
     then do
       loc <- location
       putStrLn $ loc

@@ -4,7 +4,6 @@ module Main where
 
 import Options.Applicative
 import Data.Semigroup ((<>))
-
 import CommandLine
 import Knives
 
@@ -16,8 +15,16 @@ main = do
       <> header "Swiss Army Knife -- Many useful functions for the hacker in all of us." )
   
   case cmd of
-    ExtIP extipOpts   -> knifeExtIP     extipOpts
-    Kernel kernelOpts -> knifeKernel    kernelOpts
-    Sleep sleepOpts   -> knifeSleep     sleepOpts 
-    ZfsCheck zfsOpts  -> knifeZfsCheck  zfsOpts
-    WireGuard wgOpts  -> knifeWireGuard wgOpts
+    ExtIP extipOpts     -> knifeExtIP     extipOpts
+    Kernel kernelOpts   -> knifeKernel    kernelOpts
+    Sleep sleepOpts     -> knifeSleep     sleepOpts 
+    Version versionOpts -> knifeVersion   versionOpts 
+    ZfsCheck zfsOpts    -> knifeZfsCheck  zfsOpts
+    WireGuard wgOpts    -> knifeWireGuard wgOpts
+    
+--- versionInfo :: Parser (a -> a)
+--- versionInfo = infoOption versionString
+---   (  long "version"
+---   <> short 'v'
+---   <> help "Show version information" )
+---   where versionString = "Swiss Army Knife - Version 0.0.1.0"

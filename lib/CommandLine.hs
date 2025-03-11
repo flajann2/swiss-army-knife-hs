@@ -8,6 +8,7 @@ import Options.Applicative
 -- Define data types for our commands and options
 data Command
   = ExtIP     ExtIPOptions
+  | Version   VersionOptions
   | Kernel    KernelOptions
   | Sleep     SleepOptions
   | ZfsCheck  ZfsCheckOptions
@@ -25,6 +26,8 @@ data KernelOptions = KernelOptions
 data SleepOptions = SleepOptions
   { secondsToSleep :: Maybe Int } deriving Show
 
+data VersionOptions = VersionOptions Bool deriving Show
+
 data ZfsCheckOptions = ZfsCheckOptions
   { full :: Bool } deriving Show
 
@@ -40,9 +43,9 @@ data GlobalOptions = GlobalOptions
 
 globalOptionsParser :: Parser GlobalOptions
 globalOptionsParser = GlobalOptions
-  <$> switch ( long "verbose"
+  <$> switch ( long     "verbose"
                <> short 'v'
-               <> help "Enable verbose mode" )
+               <> help  "Enable verbose mode" )
 
 extipOptionsParser :: Parser ExtIPOptions
 extipOptionsParser = ExtIPOptions
@@ -59,6 +62,11 @@ kernelOptionsParser = KernelOptions
                <> short 'j'
                <> help "Just display the numerical version number, no adjoining text." )
 
+-- version has no options
+versionOptionsParser :: Parser VersionOptions
+versionOptionsParser = VersionOptions
+  <$> switch ( long "noop" )
+  
 sleepOptionsParser :: Parser SleepOptions
 sleepOptionsParser = SleepOptions
   <$> optional (option auto ( long "wait"
@@ -96,6 +104,7 @@ commandParser = subparser
   (    command "extip"    (info (ExtIP     <$> extipOptionsParser)    (progDesc "Display external IP address"))
     <> command "kernel"   (info (Kernel    <$> kernelOptionsParser)   (progDesc "Display kernel information, both installed and currently running"))
     <> command "sleep"    (info (Sleep     <$> sleepOptionsParser)    (progDesc "Put the machine to sleep"))
+    <> command "version"  (info (Version   <$> versionOptionsParser)  (progDesc "Version of Swiss Army Knife"))
     <> command "zfscheck" (info (ZfsCheck  <$> zfscheckOptionsParser) (progDesc "Check zfs availibility for the current kernel"))
     <> command "wg"       (info (WireGuard <$> wgOptionsParser)       (progDesc "Manage WireGuard VPNs"))
   )

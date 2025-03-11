@@ -1,11 +1,17 @@
 * My personal notes for swiss-army-knife-hs
   These are my personal notes for this
   project. They are not promised to be
-  uptodate or even accurate. They are only
-  intended for myself and no one else.
+  up-to-date or even accurate. They are only
+  intended for myself and no one else. Mispellings,
+  non-PC references, and all.
 
   You may find something useful here, but it is not gauranteed.
 ** Nothing to see here. Move it along. 
+   + To be honest, I am so tempted to insert something political here, but
+     really that would go against my core principles. Politics does not
+     usually belong in software development. Period. So as I said: Nothing to see here.
+     Move it along. And if you have a big achey 
+     problem with that, too bad.
 ** Just ported this from the Elixir version. Elixir is not good for
    command-line utilities. It is great for writing daemons, however,
    with its all-mighty OTP.
@@ -17,4 +23,8 @@
      + PKGBUILD
      + .SRCINFO
      + as well as in the cabal file
+     + makepkg wants cabal-install, not cabal.
    + 
+** I am an idiot! I did not put a --version option. Adding that now.
+   + I added it as a new command. Later we will fix this TODO
+** Use of head instead of listToMaybe. TODO

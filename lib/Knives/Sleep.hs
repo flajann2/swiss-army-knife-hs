@@ -6,9 +6,9 @@ import System.Process
 import CommandLine
 
 knifeSleep :: SleepOptions -> IO ()
-knifeSleep opts = do
-  putStrLn $ "Put the machine to sleep." ++ show (secondsToSleep opts)
-  case (secondsToSleep opts) of
+knifeSleep optsS = do
+  putStrLn $ "Put the machine to sleep." ++ show (secondsToSleep optsS)
+  case (secondsToSleep optsS) of
     Just secs -> do putStrLn $ "sleep in " ++ show secs ++ " seconds."
                     _n <- readProcess "sleep" [show secs] ""
                     return ()

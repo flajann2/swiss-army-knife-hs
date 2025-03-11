@@ -12,7 +12,7 @@
 
 ** Versions
    + 0.0.0.2 - bug fixes
-   + 0.0.1.0 - new feature
+   + 0.0.1.1 - new feature
    
 ** Introduction
    Swiss-Army-Knife is a collection of useful
@@ -42,7 +42,8 @@
 *** sak wg
     If you use WireGuard for your VPN, manage it from
     here. List your installed WireGuard options,
-    and swap among them.
+    and swap among them. you can start, stop, and list your
+    WireGuard VPNs.
 
 ** Examples
    + sak extip
