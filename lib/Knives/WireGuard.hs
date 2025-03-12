@@ -24,7 +24,7 @@ knifeWireGuard WireGuardOptions { listWGs
         (Nothing, True, False)   -> deactivate
         (Nothing, False, True)   -> reactivate
         _                        -> return ()
-  | otherwise = print "Options aside from --list or -l are mutually exclusive"
+  | otherwise = putStrLn "Options aside from --list or -l are mutually exclusive"
   where
     wgDir = "/etc/wireguard/"
     wgList :: IO [String]
