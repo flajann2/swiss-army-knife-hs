@@ -1,4 +1,3 @@
--- Command Line Parser 
 {-# LANGUAGE OverloadedStrings #-}
 
 module CommandLine where
