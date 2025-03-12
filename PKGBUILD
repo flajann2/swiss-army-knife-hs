@@ -18,6 +18,7 @@ build() {
 }
 
 package() {
+    cd "$srcdir/$pkgname"
     mkdir -p "$pkgdir/usr/bin"
     cabal install --overwrite-policy=always
     install -Dm755 $(find . -path "*/sak/build/sak/*" -name sak -type f) "$pkgdir/usr/bin/sak"
