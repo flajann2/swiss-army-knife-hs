@@ -18,8 +18,6 @@ build() {
 }
 
 package() {
-    echo "A: $srcdir/$pkgname"
-    echo "B: $pkgdir/usr/bin/sak"
     cd "$srcdir/$pkgname"
     mkdir -p "$pkgdir/usr/bin"
     cabal install --overwrite-policy=always
