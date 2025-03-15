@@ -1,15 +1,8 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Knives.NetMan where
 
 import Utils
 import CommandLine
-import System.IO
-import System.Process
-import System.Directory (getDirectoryContents)
-import System.FilePath (dropExtension, takeExtension)
 import Control.Monad (when)
-import Data.List
 
 knifeNetMan :: NetManOptions -> IO ()
 knifeNetMan NetManOptions { activateNM
@@ -18,11 +11,13 @@ knifeNetMan NetManOptions { activateNM
   | isExclusiveOr [ activateNM
                   , deactivateNM
                   , reactivateNM] = do
-      when activateNM   activate
-      when deactivateNM deactivate
-      when reactivateNM reactivate
+      _ <- when activateNM   activate
+      _ <- when deactivateNM deactivate
+      _ <- when reactivateNM reactivate
+      return ()
   | otherwise = putStrLn("You must specify one and only one option for NetMan.")
   where
-    activate   = undefined
-    deactivate = undefined
-    reactivate = undefined
+    service = "NetworkManager.service"
+    activate   = systemctl_ ["start",   service]
+    deactivate = systemctl_ ["stop",    service]
+    reactivate = systemctl_ ["restart", service]

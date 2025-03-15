@@ -1,15 +1,8 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Knives.SysNet where
 
 import Utils
 import CommandLine
-import System.IO
-import System.Process
-import System.Directory (getDirectoryContents)
-import System.FilePath (dropExtension, takeExtension)
 import Control.Monad (when)
-import Data.List
 
 knifeSysNet :: SysNetOptions -> IO ()
 knifeSysNet SysNetOptions { activateSN
@@ -23,6 +16,17 @@ knifeSysNet SysNetOptions { activateSN
       when reactivateSN reactivate
   | otherwise = putStrLn("You must specify one and only one option for SysNet.")
   where
-    activate   = undefined
-    deactivate = undefined
-    reactivate = undefined
+    socket  = "systemd-networkd.socket"
+    service = "systemd-networkd.service"
+    
+    activate   = do
+      systemctl_ ["start",   socket]
+      systemctl_ ["start",   service]
+
+    deactivate = do
+      systemctl_ ["stop",   socket]
+      systemctl_ ["stop",   service]
+ 
+    reactivate = do
+      systemctl_ ["restart",   socket]
+      systemctl_ ["restart",   service]

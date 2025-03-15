@@ -16,6 +16,11 @@ isExclusiveOrNone bs = (length $ filter id bs) `elem` exorno
 systemctl :: [String] -> IO [String]
 systemctl parms = systemG $ "sudo" : "systemctl" : parms  
       
+systemctl_ :: [String] -> IO ()
+systemctl_ parms = do
+  _ <- systemG $ "sudo" : "systemctl" : parms
+  return ()
+
 systemG :: [String] -> IO [String]
 systemG (cmd:parms) = do
   (_, Just hout, _, _) <- createProcess (proc cmd parms) { std_out = CreatePipe }

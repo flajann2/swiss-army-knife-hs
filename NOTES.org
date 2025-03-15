@@ -41,3 +41,10 @@
    + Currently, there is nothing in place to easily allow one knife
      to invoke another one without passing in the options, but then
      that should be fine.
+** Version numbers
+   X: Major version (breaking changes)
+   Y: Minor version (new features)
+   Z: Patch version (bug fixes)
+   W: Build or revision number (specific iteration)
+*** This is now the standard for this project
+
