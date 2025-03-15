@@ -28,3 +28,16 @@
 ** I am an idiot! I did not put a --version option. Adding that now.
    + I added it as a new command. Later we will fix this TODO
 ** Use of head instead of listToMaybe. TODO
+** Network Controls
+   I am creating two new knives to do these commands:
+   + systemctl start systemd-networkd.socket
+      systemctl start systemd-networkd.service
+   + systemctl start NetworkManager.service
+   As such, one might make the argument that I should apply DRY
+   to the two knives, but I am not seeing any strong benefit
+   form that. As shuch, every knife shall be independent of the other
+   knives code-wise.One knife is allowed to invoke another knife, but
+   otherwise functionality shall remain separate.
+   + Currently, there is nothing in place to easily allow one knife
+     to invoke another one without passing in the options, but then
+     that should be fine.

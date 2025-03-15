@@ -16,3 +16,6 @@ import Knives.Sleep
 import Knives.Version
 import Knives.WireGuard
 import Knives.ZfsCheck
+import Knives.NetMan
+import Knives.SysNet
+

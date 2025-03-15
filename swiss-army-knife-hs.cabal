@@ -33,6 +33,8 @@ library
       Knives.WireGuard
       Knives.ZfsCheck
       Knives.Kernel
+      Knives.SysNet
+      Knives.NetMan
   other-modules:
       Paths_swiss_army_knife_hs
   hs-source-dirs:

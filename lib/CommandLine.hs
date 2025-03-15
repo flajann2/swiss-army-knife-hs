@@ -12,6 +12,8 @@ data Command
   | Sleep     SleepOptions
   | ZfsCheck  ZfsCheckOptions
   | WireGuard WireGuardOptions
+  | NetMan    NetManOptions
+  | SysNet    SysNetOptions
   deriving Show 
 
 data ExtIPOptions = ExtIPOptions
@@ -35,6 +37,18 @@ data WireGuardOptions = WireGuardOptions
   , activateWG   :: Maybe String
   , deactivateWG :: Bool
   , reactivateWG :: Bool
+  } deriving Show
+
+data NetManOptions = NetManOptions
+  { activateNM   :: Bool
+  , deactivateNM :: Bool
+  , reactivateNM :: Bool
+  } deriving Show
+
+data SysNetOptions = SysNetOptions
+  { activateSN   :: Bool
+  , deactivateSN :: Bool
+  , reactivateSN :: Bool
   } deriving Show
 
 data GlobalOptions = GlobalOptions
@@ -96,6 +110,30 @@ wgOptionsParser = WireGuardOptions
                  <> short 'r'
                  <> help "Reactivate active WireGuardG VPNs")
 
+nmOptionsParser :: Parser NetManOptions
+nmOptionsParser = NetManOptions
+  <$> switch   ( long "activate"
+                 <> short 'a'
+                 <> help "Activate (start) NetworkManager")
+  <*> switch   ( long "deactivate"
+                 <> short 'd'
+                 <> help "Deactivate (stop) NetworkManager")
+  <*> switch   ( long "reactivate"
+                 <> short 'r'
+                 <> help "Reactivate (restart) NetworkManager")
+
+snOptionsParser :: Parser SysNetOptions
+snOptionsParser = SysNetOptions
+  <$> switch   ( long "activate"
+                 <> short 'a'
+                 <> help "Activate (start) systemd-networkd socket and service")
+  <*> switch   ( long "deactivate"
+                 <> short 'd'
+                 <> help "Deactivate (stop) systemd-networkd socket and service")
+  <*> switch   ( long "reactivate"
+                 <> short 'r'
+                 <> help "Reactivate (restart) systemd-networkd socket and service")
+
 
 -- Combine the subcommand parsers
 commandParser :: Parser Command
@@ -106,6 +144,8 @@ commandParser = subparser
     <> command "version"  (info (Version   <$> versionOptionsParser)  (progDesc "Version of Swiss Army Knife"))
     <> command "zfscheck" (info (ZfsCheck  <$> zfscheckOptionsParser) (progDesc "Check zfs availibility for the current kernel"))
     <> command "wg"       (info (WireGuard <$> wgOptionsParser)       (progDesc "Manage WireGuard VPNs"))
+    <> command "nm"       (info (NetMan    <$> nmOptionsParser)       (progDesc "Manage NetworkManager"))
+    <> command "sn"       (info (SysNet    <$> snOptionsParser)       (progDesc "Manage systemd-networkd"))
   )
 
 -- Combine global options with the command parser

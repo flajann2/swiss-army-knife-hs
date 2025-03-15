@@ -21,4 +21,3 @@ main = do
     Version versionOpts -> knifeVersion   versionOpts 
     ZfsCheck zfsOpts    -> knifeZfsCheck  zfsOpts
     WireGuard wgOpts    -> knifeWireGuard wgOpts
-    
