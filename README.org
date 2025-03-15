@@ -15,10 +15,14 @@
    + 0.0.1.1 - new feature
    + 0.1.0.3 - 2 new feature, internally invokes sudo,
       adopted "standard" for 4 number versioning X.Y.Z.W:
-        X: Major version (breaking changes)
-        Y: Minor version (new features)
-        Z: Patch version (bug fixes)
-        W: Build or revision number (specific iteration)
+
+      | # | Description                                   |
+      |---+-----------------------------------------------|
+      | X | Major version (breaking changes)              |
+      | Y | Minor version (new features)                  |
+      | Z | Patch version (bug fixes)                     |
+      | W | Build or revision number (specific iteration) |
+
       So from now on, this will be applied.
 
       
