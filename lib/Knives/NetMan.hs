@@ -1,7 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Knives.NetMan where
-  
+
+import Utils
 import CommandLine
 import System.IO
 import System.Process
@@ -13,13 +14,15 @@ import Data.List
 knifeNetMan :: NetManOptions -> IO ()
 knifeNetMan NetManOptions { activateNM
                           , deactivateNM
-                          , reactivateNM} = do
-  case (activateNM, deactivateNM, reactivateNM) of
-    (True,  False, False) -> activate
-    (False, True,  False) -> deactivate
-    (False, False, True)  -> reactivate
-    (_, _, _)             -> putStrLn("You must specify one and only one option.")
-    where
-      activate   = undefined
-      deactivate = undefined
-      reactivate = undefined
+                          , reactivateNM}
+  | isExclusiveOr [ activateNM
+                  , deactivateNM
+                  , reactivateNM] = do
+      when activateNM   activate
+      when deactivateNM deactivate
+      when reactivateNM reactivate
+  | otherwise = putStrLn("You must specify one and only one option for NetMan.")
+  where
+    activate   = undefined
+    deactivate = undefined
+    reactivate = undefined

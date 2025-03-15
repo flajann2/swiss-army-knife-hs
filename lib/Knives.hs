@@ -7,6 +7,8 @@ module Knives
     , knifeVersion
     , knifeZfsCheck
     , knifeWireGuard
+    , knifeNetMan
+    , knifeSysNet
     ) where
 
 
