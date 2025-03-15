@@ -2,6 +2,7 @@
 
 module Knives.WireGuard where
 
+import Utils (systemctl)
 import CommandLine
 import System.IO
 import System.Process
@@ -58,12 +59,6 @@ knifeWireGuard WireGuardOptions { listWGs
       mapM_ (\w -> systemctl $ ["restart"] ++  [vpn2wg w]) awgs
       return()
 
-    systemctl :: [String] -> IO [String]
-    systemctl parms = do
-      (_, Just hout, _, _) <- createProcess (proc "systemctl" parms) { std_out = CreatePipe }
-      out <- hGetContents hout
-      return $ lines out
-      
     wgStatus :: [String] -> IO [(String, String, Bool)]
     wgStatus wgs = do
       let quick = map (\w -> vpn2wg w) wgs
