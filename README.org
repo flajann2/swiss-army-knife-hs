@@ -13,7 +13,15 @@
 ** Versions
    + 0.0.0.2 - bug fixes
    + 0.0.1.1 - new feature
-   
+   + 0.1.0.3 - 2 new feature, internally invokes sudo,
+      adopted "standard" for 4 number versioning X.Y.Z.W:
+        X: Major version (breaking changes)
+        Y: Minor version (new features)
+        Z: Patch version (bug fixes)
+        W: Build or revision number (specific iteration)
+      So from now on, this will be applied.
+
+      
 ** Introduction
    Swiss-Army-Knife is a collection of useful
    tools that you can do quickly.
@@ -24,6 +32,8 @@
 ** Documentation
    These are the current "knives" implemented. More to come. Open
    to suggestions.
+   + Note that you no longer have to prepend "sudo" to do system-level
+      operations.
 *** sak --help
     Will list all the current commands.
 *** sak extip
@@ -44,6 +54,10 @@
     here. List your installed WireGuard options,
     and swap among them. you can start, stop, and list your
     WireGuard VPNs.
+*** sak nm
+    Manage NetworkManager
+*** sak sn
+    Manage systemd-networkd
 
 ** Examples
    + sak extip

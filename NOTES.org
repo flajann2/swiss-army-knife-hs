@@ -22,9 +22,13 @@
    + update the version and release numbers in both:
      + PKGBUILD
      + .SRCINFO
-     + as well as in the cabal file
+     + as well as in the cabal  and README files
      + makepkg wants cabal-install, not cabal.
-   + 
+   + run makepkg
+     + TEST TEST TEST
+     + copy PKGBUILD and .SRCINFO to the AUR repo
+     + TEST TEST TEST
+     + Push the AUR repo and verify it was actually updated  
 ** I am an idiot! I did not put a --version option. Adding that now.
    + I added it as a new command. Later we will fix this TODO
 ** Use of head instead of listToMaybe. TODO
