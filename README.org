@@ -24,7 +24,7 @@
       | W | Build or revision number (specific iteration) |
 
       So from now on, this will be applied.
-
+   + 0.1.0.4 - fix for install issues with 0.1.0.3
       
 ** Introduction
    Swiss-Army-Knife is a collection of useful
