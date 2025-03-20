@@ -51,6 +51,7 @@ library
     , split
     , directory
     , filepath
+    , resolv
   default-language: GHC2021
 
 executable sak
