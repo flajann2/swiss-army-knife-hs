@@ -51,4 +51,7 @@
    Z: Patch version (bug fixes)
    W: Build or revision number (specific iteration)
 *** This is now the standard for this project
-
+** New Features planned
+   + sakd for scheduling and operations requiring root access (DANGEROUS)
+   + Yet another alternative to cron and at and anachron for scheduling jobs,
+     and to ensure anaron behavior, run once if schedule was missed.
