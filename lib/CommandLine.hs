@@ -36,18 +36,23 @@ data WireGuardOptions = WireGuardOptions
   { listWGs      :: Bool
   , activateWG   :: Maybe String
   , deactivateWG :: Bool
+  , disbleWG     :: Bool
   , reactivateWG :: Bool
   } deriving Show
 
 data NetManOptions = NetManOptions
   { activateNM   :: Bool
+  , enableNM     :: Bool
   , deactivateNM :: Bool
+  , disableNM    :: Bool
   , reactivateNM :: Bool
   } deriving Show
 
 data SysNetOptions = SysNetOptions
   { activateSN   :: Bool
+  , enableSN     :: Bool
   , deactivateSN :: Bool
+  , disableSN    :: Bool
   , reactivateSN :: Bool
   } deriving Show
 
@@ -106,6 +111,9 @@ wgOptionsParser = WireGuardOptions
   <*> switch   ( long "deactivate"
                  <> short 'd'
                  <> help "Deactivat all WireGuard VPNs")
+  <*> switch   ( long "disable"
+                 <> short 'D'
+                 <> help "Disable and Deactivat all WireGuard VPNs")
   <*> switch   ( long "reactivate"
                  <> short 'r'
                  <> help "Reactivate active WireGuardG VPNs")
@@ -115,9 +123,15 @@ nmOptionsParser = NetManOptions
   <$> switch   ( long "activate"
                  <> short 'a'
                  <> help "Activate (start) NetworkManager")
+  <*> switch   ( long "enable"
+                 <> short 'A'
+                 <> help "Enable and Activate (start) NetworkManager")
   <*> switch   ( long "deactivate"
                  <> short 'd'
                  <> help "Deactivate (stop) NetworkManager")
+  <*> switch   ( long "disable"
+                 <> short 'D'
+                 <> help "Disable and Deactivate (stop) NetworkManager")
   <*> switch   ( long "reactivate"
                  <> short 'r'
                  <> help "Reactivate (restart) NetworkManager")
@@ -127,9 +141,15 @@ snOptionsParser = SysNetOptions
   <$> switch   ( long "activate"
                  <> short 'a'
                  <> help "Activate (start) systemd-networkd socket and service")
+  <*> switch   ( long "enable"
+                 <> short 'A'
+                 <> help "Enable and Activate (start) systemd-networkd socket and service")
   <*> switch   ( long "deactivate"
                  <> short 'd'
                  <> help "Deactivate (stop) systemd-networkd socket and service")
+  <*> switch   ( long "disable"
+                 <> short 'D'
+                 <> help "Disable and Deactivate (stop) systemd-networkd socket and service")
   <*> switch   ( long "reactivate"
                  <> short 'r'
                  <> help "Reactivate (restart) systemd-networkd socket and service")
