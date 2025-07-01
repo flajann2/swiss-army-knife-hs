@@ -14,7 +14,9 @@ import Data.List
 knifeWireGuard :: WireGuardOptions -> IO ()
 knifeWireGuard WireGuardOptions { listWGs
                                 , activateWG
+                                , enableWG
                                 , deactivateWG
+                                , disableWG
                                 , reactivateWG}
   | checkMutualExclusivity = do
       wgs <- wgList
@@ -36,7 +38,9 @@ knifeWireGuard WireGuardOptions { listWGs
       return wgs
       
     checkMutualExclusivity = check [ activateWG /= Nothing
+                                   , enableWG   /= Nothing
                                    , deactivateWG
+                                   , disableWG
                                    , reactivateWG]
 
     check bs   = (length $ filter id bs) `elem` [0, 1]

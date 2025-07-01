@@ -35,8 +35,9 @@ data ZfsCheckOptions = ZfsCheckOptions
 data WireGuardOptions = WireGuardOptions
   { listWGs      :: Bool
   , activateWG   :: Maybe String
+  , enableWG     :: Maybe String
   , deactivateWG :: Bool
-  , disbleWG     :: Bool
+  , disableWG    :: Bool
   , reactivateWG :: Bool
   } deriving Show
 
@@ -108,6 +109,10 @@ wgOptionsParser = WireGuardOptions
                               <> short 'a'
                               <> metavar "WGVPN"
                               <> help "WireGuard VPN to activate"))
+  <*> optional (strOption ( long "enable"
+                              <> short 'A'
+                              <> metavar "WGVPN"
+                              <> help "WireGuard VPN to enable and activate"))
   <*> switch   ( long "deactivate"
                  <> short 'd'
                  <> help "Deactivat all WireGuard VPNs")
