@@ -2,12 +2,14 @@ module Utils where
 
 import System.IO
 import System.Process
-import System.Directory (getDirectoryContents)
-import System.FilePath (dropExtension, takeExtension)
+-- import System.Directory (getDirectoryContents)
+-- import System.FilePath (dropExtension, takeExtension)
 
+-- WARN: Cannot handle inflinite lists.
 isExclusiveOr :: [Bool] -> Bool
 isExclusiveOr bs = (length $ filter id bs) == 1
 
+-- WARN: Cannot handle inflinite lists.
 isExclusiveOrNone :: [Bool] -> Bool
 isExclusiveOrNone bs = (length $ filter id bs) `elem` exorno
   where 
@@ -22,6 +24,7 @@ systemctl_ parms = do
   return ()
 
 systemG :: [String] -> IO [String]
+systemG [] = return []
 systemG (cmd:parms) = do
   (_, Just hout, _, _) <- createProcess (proc cmd parms) { std_out = CreatePipe }
   out <- hGetContents hout

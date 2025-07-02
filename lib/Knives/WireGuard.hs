@@ -4,8 +4,8 @@ module Knives.WireGuard where
 
 import Utils (systemctl)
 import CommandLine
-import System.IO
-import System.Process
+-- import System.IO
+-- import System.Process
 import System.Directory (getDirectoryContents)
 import System.FilePath (dropExtension, takeExtension)
 import Control.Monad (when)
@@ -22,11 +22,13 @@ knifeWireGuard WireGuardOptions { listWGs
       wgs <- wgList
       ss  <- wgStatus wgs
       when listWGs $ putStrLn $ formatStatus ss
-      case (activateWG, deactivateWG, reactivateWG) of
-        (Just vpn, False, False) -> activate vpn
-        (Nothing, True, False)   -> deactivate
-        (Nothing, False, True)   -> reactivate
-        _                        -> return ()
+      case (activateWG , enableWG , deactivateWG , disableWG , reactivateWG) of
+            (Just vpn  , Nothing  , False        , False     , False) -> activate vpn
+            (Nothing   , Just vpn , False        , False     , False) -> enable vpn
+            (Nothing   , Nothing  , True         , False     , False) -> deactivate
+            (Nothing   , Nothing  , False        , True      , False) -> disable
+            (Nothing   , Nothing  , False        , False     , True ) -> reactivate
+            _                        -> return ()
   | otherwise = putStrLn "Options aside from --list or -l are mutually exclusive"
   where
     wgDir = "/etc/wireguard/"
@@ -34,7 +36,7 @@ knifeWireGuard WireGuardOptions { listWGs
     wgList = do
       rawlist <- getDirectoryContents wgDir
       let wgconf = filter (\f -> takeExtension f == ".conf") rawlist
-      let wgs = map (\f -> dropExtension f) wgconf
+      let wgs    = map (\f -> dropExtension f) wgconf
       return wgs
       
     checkMutualExclusivity = check [ activateWG /= Nothing
@@ -51,22 +53,34 @@ knifeWireGuard WireGuardOptions { listWGs
       _ <- systemctl ["start", vpn2wg vpn]
       return ()
 
+    enable :: String -> IO ()
+    enable vpn = do
+      _ <- systemctl ["enable", "--now", vpn2wg vpn]
+      return ()
+    
     deactivate :: IO ()
     deactivate   = do
       awgs <- activeWG
-      mapM_ (\w -> systemctl $ ["stop"] ++ [vpn2wg w]) awgs
+      mapM_ (\w -> systemctl $ ["stop"] <> [vpn2wg w]) awgs
       return ()
+
+    disable :: IO ()
+    disable = do
+      awgs <- activeWG
+      mapM_ (\w -> systemctl $ ["disable", "--now"] <> [vpn2wg w]) awgs
+      return ()
+
 
     reactivate :: IO ()
     reactivate   = do
       awgs <- activeWG
-      mapM_ (\w -> systemctl $ ["restart"] ++  [vpn2wg w]) awgs
+      mapM_ (\w -> systemctl $ ["restart"] <>  [vpn2wg w]) awgs
       return()
 
     wgStatus :: [String] -> IO [(String, String, Bool)]
     wgStatus wgs = do
       let quick = map (\w -> vpn2wg w) wgs
-      let cmd = ["is-active"] ++ quick
+      let cmd   = ["is-active"] <> quick
       stats <- systemctl cmd
       return $ [(wg, sact, sact == "active") | (wg, sact) <- zip wgs stats  ]
 
