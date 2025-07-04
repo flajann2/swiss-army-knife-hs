@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -Wno-unused-top-binds #-}
 
 module Knives.WireGuard where
 
@@ -32,6 +33,7 @@ knifeWireGuard WireGuardOptions { listWGs
   | otherwise = putStrLn "Options aside from --list or -l are mutually exclusive"
   where
     wgDir = "/etc/wireguard/"
+
     wgList :: IO [String]
     wgList = do
       rawlist <- getDirectoryContents wgDir
@@ -39,6 +41,22 @@ knifeWireGuard WireGuardOptions { listWGs
       let wgs    = map (\f -> dropExtension f) wgconf
       return wgs
       
+    wgStatus :: [String] -> IO [(String, String, String, Bool, Bool)]
+    wgStatus wgs = do
+      let quick = map (\w -> vpn2wg w) wgs
+      let cmd_a   = ["is-active"]  <> quick
+      let cmd_e   = ["is-enabled"] <> quick
+      stats_a <- systemctl cmd_a
+      stats_e <- systemctl cmd_e
+      return $ [(wg
+                , sact
+                , sena
+                , sact == "active"
+                , sena == "enabled") | (wg, sact, sena) <- zip3 wgs stats_a stats_e ]
+
+    formatStatus :: [(String, String, String, Bool, Bool)] -> String
+    formatStatus wss = intercalate "\n" [w <> ": " <> sa <> " " <> se |(w, sa, se, _, _) <- wss]
+
     checkMutualExclusivity = check [ activateWG /= Nothing
                                    , enableWG   /= Nothing
                                    , deactivateWG
@@ -46,7 +64,7 @@ knifeWireGuard WireGuardOptions { listWGs
                                    , reactivateWG]
 
     check bs   = (length $ filter id bs) `elem` [0, 1]
-    vpn2wg vpn = "wg-quick@" ++ vpn
+    vpn2wg vpn = "wg-quick@" <> vpn
     
     activate :: String -> IO ()
     activate vpn = do
@@ -77,18 +95,8 @@ knifeWireGuard WireGuardOptions { listWGs
       mapM_ (\w -> systemctl $ ["restart"] <>  [vpn2wg w]) awgs
       return()
 
-    wgStatus :: [String] -> IO [(String, String, Bool)]
-    wgStatus wgs = do
-      let quick = map (\w -> vpn2wg w) wgs
-      let cmd   = ["is-active"] <> quick
-      stats <- systemctl cmd
-      return $ [(wg, sact, sact == "active") | (wg, sact) <- zip wgs stats  ]
-
-    formatStatus :: [(String, String, Bool)] -> String
-    formatStatus wss = intercalate "\n" [w ++ ": " ++ s |(w, s, _) <- wss]
-
     activeWG :: IO [String]
     activeWG = do
       wgl <- wgList
       wgs <- wgStatus wgl
-      return [s | (s, _, b) <- wgs, b]
+      return [s | (s, _, _, b, _) <- wgs, b]
