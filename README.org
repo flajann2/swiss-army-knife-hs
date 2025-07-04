@@ -11,8 +11,9 @@
    Fred Mitchell & Atomlogik
 
 ** Versions
-   + 0.0.0.2 - bug fixes
-   + 0.0.1.1 - new feature
+   + 1.0.0.0 - enable and disable daemons, wg -l list has an extra field.
+              - Changelog.org removed. Basically a duplication of Versions here.
+   + 0.1.0.4 - fix for install issues with 0.1.0.3
    + 0.1.0.3 - 2 new feature, internally invokes sudo,
       adopted "standard" for 4 number versioning X.Y.Z.W:
 
@@ -24,7 +25,8 @@
       | W | Build or revision number (specific iteration) |
 
       So from now on, this will be applied.
-   + 0.1.0.4 - fix for install issues with 0.1.0.3
+   + 0.0.1.1 - new feature added
+   + 0.0.0.2 - bug fixes
       
 ** Introduction
    Swiss-Army-Knife is a collection of useful
@@ -58,14 +60,27 @@
     here. List your installed WireGuard options,
     and swap among them. you can start, stop, and list your
     WireGuard VPNs.
+    Now supports enabling and disabling of the underlying daemon.
 *** sak nm
     Manage NetworkManager
+    Now supports enabling and disabling of the underlying daemon.
 *** sak sn
     Manage systemd-networkd
+    Now supports enabling and disabling of the underlying daemon.
 
 ** Examples
    + sak extip
      Will list your external IP and location information
    + sak wg -l
-     (If you are using wg_quick) will list all of your available WG vpns.
+     (If you are using wg_quick) will list all of your available WG vpns,
+     as well as their active and enabled statuses.
+   + sak wg -d
+     Will deactivate (but not disable) all wireguard VPNs.
+   + sak wg -D
+     Will disable (but not deactivate) all WireGuard VPNs.
+   + sak sn -A
+     Will enable and start systemd-networkd.
+   + sak nm -D
+     Will disable and stop NetworkManager.
+     
      

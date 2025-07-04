@@ -115,13 +115,13 @@ wgOptionsParser = WireGuardOptions
                               <> help "WireGuard VPN to enable and activate"))
   <*> switch   ( long "deactivate"
                  <> short 'd'
-                 <> help "Deactivat all WireGuard VPNs")
+                 <> help "Deactivate (but not disable) all WireGuard VPNs")
   <*> switch   ( long "disable"
                  <> short 'D'
-                 <> help "Disable and Deactivat all WireGuard VPNs")
+                 <> help "Disable (but not deactivate) all WireGuard VPNs")
   <*> switch   ( long "reactivate"
                  <> short 'r'
-                 <> help "Reactivate active WireGuardG VPNs")
+                 <> help "Reactivate currently active WireGuardG VPNs")
 
 nmOptionsParser :: Parser NetManOptions
 nmOptionsParser = NetManOptions
