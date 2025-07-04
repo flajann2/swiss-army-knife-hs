@@ -84,7 +84,7 @@ knifeWireGuard WireGuardOptions { listWGs
 
     disable :: IO ()
     disable = do
-      awgs <- activeWG
+      awgs <- enabledWG
       mapM_ (\w -> systemctl $ ["disable", "--now"] <> [vpn2wg w]) awgs
       return ()
 
@@ -99,4 +99,10 @@ knifeWireGuard WireGuardOptions { listWGs
     activeWG = do
       wgl <- wgList
       wgs <- wgStatus wgl
-      return [s | (s, _, _, b, _) <- wgs, b]
+      return [s | (s, _, _, a, _) <- wgs, a]
+
+    enabledWG :: IO [String]
+    enabledWG = do
+      wgl <- wgList
+      wgs <- wgStatus wgl
+      return [s | (s, _, _, _, e) <- wgs, e]
