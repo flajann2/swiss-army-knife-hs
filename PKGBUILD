@@ -21,6 +21,6 @@ package() {
     cd "$srcdir/$pkgname"
     mkdir -p "$pkgdir/usr/bin"
     cabal install --overwrite-policy=always
-    install -Dm755 $(find . -path "*/sak/build/sak/*" -name sak -type f) "$pkgdir/usr/bin/sak"
+    install -Dm755 $(find . -path "*/dist-newstyle/build/*" -name sak -type f) "$pkgdir/usr/bin/sak"
     install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
