@@ -11,8 +11,9 @@
    Fred Mitchell & Atomlogik
 
 ** Versions
-   + 1.0.0.0 - enable and disable daemons, wg -l list has an extra field.
+   + 1.0.0.1 - enable and disable daemons, wg -l list has an extra field.
               - Changelog.org removed. Basically a duplication of Versions here.
+              - version 1.0.0.0 was stillborn. Installation issues fixed
    + 0.1.0.4 - fix for install issues with 0.1.0.3
    + 0.1.0.3 - 2 new feature, internally invokes sudo,
       adopted "standard" for 4 number versioning X.Y.Z.W:
