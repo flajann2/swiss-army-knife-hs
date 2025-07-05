@@ -1,6 +1,6 @@
-# Maintainer: Fred Mitchell <fred.mitchell@atomlogik.de>
+# Maintainer: qFred Mitchell <fred.mitchell@atomlogik.de>
 pkgname=swiss-army-knife-hs
-pkgver=1.0.0.0
+pkgver=1.0.0.1
 pkgrel=5
 pkgdesc="A collection of powerful but useful small tools."
 arch=('x86_64')
@@ -15,6 +15,13 @@ md5sums=('SKIP')
 prepare() {
     cd "$srcdir"
     export HOME="$srcdir"
+    export BOOTSTRAP_HASKELL_NONINTERACTIVE=1
+    export BOOTSTRAP_HASKELL_NO_UPGRADE=1
+    export BOOTSTRAP_HASKELL_MINIMAL=1
+    export BOOTSTRAP_HASKELL_GHC_VERSION=9.10.1
+    export BOOTSTRAP_HASKELL_CABAL_VERSION=1.14
+    export BOOTSTRAP_HASKELL_INSTALL_NO_STACK=1
+    export BOOTSTRAP_HASKELL_INSTALL_NO_STACK_HOOK=1
 
     curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
     source "$srcdir/.ghcup/env"
