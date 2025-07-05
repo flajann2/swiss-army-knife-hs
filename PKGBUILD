@@ -6,7 +6,7 @@ pkgdesc="A collection of powerful but useful small tools."
 arch=('x86_64')
 url="https://github.com/flajann2/swiss-army-knife-hs"
 license=('MIT')
-depends=('gmp' 'libffi' 'ghc' 'glibc')
+depends=('ghc' 'glibc')
 makedepends=('wget' 'xz' 'git' 'ghc-libs' 'cabal-install')
 source=("$pkgname::git+https://github.com/flajann2/swiss-army-knife-hs.git")
 
@@ -14,6 +14,7 @@ md5sums=('SKIP')
 
 prepare() {
     cd "$srcdir"
+    export HOME="$srcdir"
 
     curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
     source "$srcdir/.ghcup/env"
@@ -35,7 +36,6 @@ build() {
    ghc --version
    cabal --version
 
-   echo "**** $HOME **** $srcdir ****"
    cabal update
    mkdir -p "$HOME/.cabal"
    cabal configure \
